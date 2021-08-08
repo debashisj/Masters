@@ -1,0 +1,37 @@
+<fulfillmentToken fulfillmentType="loan" auth="user" xmlns="http://ns.adobe.com/adept">
+  <distributor>urn:uuid:501e16ca-f45c-4a0c-9a9f-8a270a9f2ed6</distributor>
+  <operatorURL>http://rps2images.ebscohost.com/fulfillment</operatorURL>
+  <transaction>s4264928:13002665:1809131:1572255319624:2140685151</transaction>
+  <expiration>2019-10-28T11:35:19-04:00</expiration>
+  <resourceItemInfo>
+    <resource>urn:uuid:7197bd11-befc-4da0-928b-3c3bd5c4b21a</resource>
+    <resourceItem>0</resourceItem>
+    <metadata>
+      <dc:title xmlns:dc="http://purl.org/dc/elements/1.1/">Grid, Cloud, and Cluster Computing and Applications</dc:title>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arabnia, Hamid R.,Tinetti, Fernando G.</dc:creator>
+      <dc:publisher xmlns:dc="http://purl.org/dc/elements/1.1/">Stylus Publishing</dc:publisher>
+      <dc:format xmlns:dc="http://purl.org/dc/elements/1.1/">application/pdf</dc:format>
+      <dc:language xmlns:dc="http://purl.org/dc/elements/1.1/">eng</dc:language>
+    </metadata>
+    <licenseToken>
+      <resource>urn:uuid:7197bd11-befc-4da0-928b-3c3bd5c4b21a</resource>
+      <permissions>
+        <display>
+          <until>2019-11-11T04:35:19-05:00</until>
+        </display>
+        <excerpt>
+          <until>2019-11-11T04:35:19-05:00</until>
+          <count initial="100"/>
+        </excerpt>
+        <print>
+          <until>2019-11-11T04:35:19-05:00</until>
+          <count initial="100"/>
+        </print>
+        <play>
+          <until>2019-11-11T04:35:19-05:00</until>
+        </play>
+      </permissions>
+    </licenseToken>
+  </resourceItemInfo>
+  <hmac>OwrQ10rOZPqzRFuYSwjXOIOIf48=</hmac>
+</fulfillmentToken>
