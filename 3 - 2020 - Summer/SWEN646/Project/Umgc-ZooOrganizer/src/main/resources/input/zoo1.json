@@ -1,0 +1,71 @@
+{
+    "zooKeeper": {
+        "name": "Debashis Jena"
+    },
+    "animals": [
+        {
+            "name": "Simba001",
+            "birthDate": "2013-01-02",
+            "speciesType": "Lion",
+            "legs": [
+                {
+                    "length": 1.9
+                },
+                {
+                    "length": 2.1
+                },
+                {
+                    "length": 2.1
+                },
+                {
+                    "length": 2.1
+                }
+            ]
+        },
+        {
+            "name": "Zazu001",
+            "birthDate": "2012-01-02",
+            "speciesType": "Eagle",
+            "wings": [
+                {
+                    "featherColor": "RED"
+                },
+                {
+                    "featherColor": "RED"
+                }
+            ]
+        },
+        {
+            "name": "Warto001",
+            "birthDate": "1969-01-02",
+            "speciesType": "Turtle",
+            "scales": [
+                {
+                    "color": "RED"
+                },
+                {
+                    "color": "BLUE"
+                }
+            ]
+        },
+        {
+            "name": "Poodu001",
+            "birthDate": "2014-01-02",
+            "speciesType": "Goat",
+            "legs": [
+                {
+                    "length": 1
+                },
+                {
+                    "length": 0.9
+                },
+                {
+                    "length": 1.1
+                },
+                {
+                    "length": 1.1
+                }
+            ]
+        }
+    ]
+}

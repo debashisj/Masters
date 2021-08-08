@@ -1,0 +1,68 @@
+{
+    "animals": [
+        {
+            "name": "lion0002",
+            "birthDate": "2015-07-12",
+            "speciesType": "Lion",
+            "legs": [
+                {
+                    "length": 1.9
+                },
+                {
+                    "length": 2.1
+                },
+                {
+                    "length": 2.1
+                },
+                {
+                    "length": 2.1
+                }
+            ]
+        },
+        {
+            "name": "Egle002",
+            "birthDate": "2013-01-16",
+            "speciesType": "Eagle",
+            "wings": [
+                {
+                    "featherColor": "RED"
+                },
+                {
+                    "featherColor": "RED"
+                }
+            ]
+        },
+        {
+            "name": "Wart002",
+            "birthDate": "1953-10-17",
+            "speciesType": "Turtle",
+            "scales": [
+                {
+                    "color": "RED"
+                },
+                {
+                    "color": "BLUE"
+                }
+            ]
+        },
+        {
+            "name": "Mayy002",
+            "birthDate": "2017-04-08",
+            "speciesType": "Goat",
+            "legs": [
+                {
+                    "length": 1
+                },
+                {
+                    "length": 0.9
+                },
+                {
+                    "length": 1.1
+                },
+                {
+                    "length": 1.1
+                }
+            ]
+        }
+    ]
+}

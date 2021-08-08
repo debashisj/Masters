@@ -1,0 +1,199 @@
+{
+  "animals" : [ {
+    "name" : "Simba001",
+    "birthDate" : "2013-01-02",
+    "age" : 7,
+    "lifeExpectancy" : 8,
+    "animalType" : "Mammal",
+    "speciesType" : "Lion",
+    "legs" : [ {
+      "length" : 1.9
+    }, {
+      "length" : 2.1
+    }, {
+      "length" : 2.1
+    }, {
+      "length" : 2.1
+    } ]
+  }, {
+    "name" : "Zazu001",
+    "birthDate" : "2012-01-02",
+    "age" : 8,
+    "lifeExpectancy" : 5,
+    "animalType" : "Bird",
+    "speciesType" : "Eagle",
+    "wings" : [ {
+      "featherColor" : "RED"
+    }, {
+      "featherColor" : "RED"
+    } ]
+  }, {
+    "name" : "Warto001",
+    "birthDate" : "1969-01-02",
+    "age" : 51,
+    "lifeExpectancy" : 59,
+    "animalType" : "Reptile",
+    "speciesType" : "Turtle",
+    "scales" : [ {
+      "color" : "RED"
+    }, {
+      "color" : "BLUE"
+    } ]
+  }, {
+    "name" : "Poodu001",
+    "birthDate" : "2014-01-02",
+    "age" : 6,
+    "lifeExpectancy" : 9,
+    "animalType" : "Mammal",
+    "speciesType" : "Goat",
+    "legs" : [ {
+      "length" : 1.0
+    }, {
+      "length" : 0.9
+    }, {
+      "length" : 1.1
+    }, {
+      "length" : 1.1
+    } ]
+  }, {
+    "name" : "lion0002",
+    "birthDate" : "2015-07-12",
+    "age" : 5,
+    "lifeExpectancy" : 10,
+    "animalType" : "Mammal",
+    "speciesType" : "Lion",
+    "legs" : [ {
+      "length" : 1.9
+    }, {
+      "length" : 2.1
+    }, {
+      "length" : 2.1
+    }, {
+      "length" : 2.1
+    } ]
+  }, {
+    "name" : "Egle002",
+    "birthDate" : "2013-01-16",
+    "age" : 7,
+    "lifeExpectancy" : 5,
+    "animalType" : "Bird",
+    "speciesType" : "Eagle",
+    "wings" : [ {
+      "featherColor" : "RED"
+    }, {
+      "featherColor" : "RED"
+    } ]
+  }, {
+    "name" : "Wart002",
+    "birthDate" : "1953-10-17",
+    "age" : 66,
+    "lifeExpectancy" : 44,
+    "animalType" : "Reptile",
+    "speciesType" : "Turtle",
+    "scales" : [ {
+      "color" : "RED"
+    }, {
+      "color" : "BLUE"
+    } ]
+  }, {
+    "name" : "Mayy002",
+    "birthDate" : "2017-04-08",
+    "age" : 3,
+    "lifeExpectancy" : 12,
+    "animalType" : "Mammal",
+    "speciesType" : "Goat",
+    "legs" : [ {
+      "length" : 1.0
+    }, {
+      "length" : 0.9
+    }, {
+      "length" : 1.1
+    }, {
+      "length" : 1.1
+    } ]
+  }, {
+    "name" : "badguy03",
+    "birthDate" : "2007-08-02",
+    "age" : 12,
+    "lifeExpectancy" : 0,
+    "animalType" : "Reptile",
+    "speciesType" : "Iguana",
+    "scales" : [ ]
+  }, {
+    "name" : "maruti03",
+    "birthDate" : "2020-12-30",
+    "age" : 0,
+    "lifeExpectancy" : 5,
+    "animalType" : "Bird",
+    "speciesType" : "Hawk",
+    "wings" : [ ]
+  }, {
+    "name" : "mufasa03",
+    "birthDate" : "2012-07-10",
+    "age" : 8,
+    "lifeExpectancy" : 7,
+    "animalType" : "Mammal",
+    "speciesType" : "Lion",
+    "legs" : [ ]
+  }, {
+    "name" : "birdie04",
+    "birthDate" : "2017-01-22",
+    "age" : 3,
+    "lifeExpectancy" : 5,
+    "animalType" : "Bird",
+    "speciesType" : "Eagle",
+    "wings" : [ {
+      "featherColor" : "RED"
+    }, {
+      "featherColor" : "RED"
+    } ]
+  }, {
+    "name" : "hawk004",
+    "birthDate" : "2019-05-21",
+    "age" : 1,
+    "lifeExpectancy" : 5,
+    "animalType" : "Bird",
+    "speciesType" : "Hawk",
+    "wings" : [ {
+      "featherColor" : "BLUE"
+    }, {
+      "featherColor" : "BLUE"
+    } ]
+  }, {
+    "name" : "goat65",
+    "birthDate" : "2007-01-15",
+    "age" : 13,
+    "lifeExpectancy" : 2,
+    "animalType" : "Mammal",
+    "speciesType" : "Goat",
+    "legs" : [ {
+      "length" : 1.1
+    }, {
+      "length" : 1.0
+    }, {
+      "length" : 1.11
+    }, {
+      "length" : 1.02
+    } ]
+  }, {
+    "name" : "Lion1201",
+    "birthDate" : "2015-03-09",
+    "age" : 5,
+    "lifeExpectancy" : 10,
+    "animalType" : "Mammal",
+    "speciesType" : "Lion",
+    "legs" : [ {
+      "length" : 1.2
+    }, {
+      "length" : 2.0
+    }, {
+      "length" : 2.1
+    }, {
+      "length" : 2.0
+    } ]
+  } ],
+  "zooKeeper" : {
+    "name" : "Debashis Jena"
+  },
+  "theme" : ""
+}

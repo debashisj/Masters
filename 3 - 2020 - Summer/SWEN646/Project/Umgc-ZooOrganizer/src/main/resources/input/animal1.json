@@ -1,0 +1,19 @@
+{
+    "name": "Lion1201",
+    "birthDate": "2015-03-09",
+    "speciesType": "Lion",
+    "legs": [
+        {
+            "length": 1.2
+        },
+        {
+            "length": 2.0
+        },
+        {
+            "length": 2.1
+        },
+        {
+            "length": 2.0
+        }
+    ]
+}
