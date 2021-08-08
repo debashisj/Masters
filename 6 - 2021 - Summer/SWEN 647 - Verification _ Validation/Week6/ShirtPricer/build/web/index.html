@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Shirt Pricing Tool</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form method="post" action="ShirtPricingCalculator">
+            <div>This program will calculate the price of a shirt being 
+                sold at an online retailer.  This retailer determines prices 
+                based upon how much material is used to make the shirt.<br><br></div>
+            
+            <div>Enter waist size <input type="text" name="waist"><br></div>
+            
+            <div>Enter length from waist to neck <input type="text" name="neck"><br></div>
+            
+            <div><input type="checkbox" name="collar" value="Yes">Would you like a collar<br></div>
+            
+            <div><input type="checkbox" name="sleeve" value="Yes">Would you like long sleeves<br></div>
+            
+            <div>Currency
+                <select name="currency">
+                   <option value="US Dollar">US Dollar</option>
+                   <option value="EURO">Euro</option>
+                 </select><br><br></div>
+            
+            <input type="submit" value="Calculate Price">
+        </form>
+    </body>
+</html>

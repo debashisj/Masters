@@ -1,0 +1,27 @@
+Hi guys, this is DJ again. I am the lead developer and the architect of the Mnemosyne app. I was responsible for the research and development for the core features of the application.
+
+-------------------------------------------
+
+This is our final architecture diagram. This is an updated version of the one that we had in the Milestone 3. 
+	--- During this milestone we finished the features that were partially complete. Some of the major core features are catch phrase capture and scheduled notification. 
+	--- We, made our application iOS compatible
+	--- Apart from this we addressed all the high and medium severity issues that may cause some malfunction.
+	--- We enhanced our user interface and user experience.
+	--- We also addressed most of the feedback comments from the professor in the last milestone meeting
+
+As you can see here, in this diagram, we have implemented the text intent feature, which will identify the timed notes, PIIs. Then the notification service will notify when the note is due. Additionally, this core notification service can be customized in many ways to notify on anything, like remind the user to use the app periodically or on a schedule to take medication or anything as such. The PIIs are identified automatically and stored as favorites. These keywords can be configured as well.
+
+Apart from these core services, we did the user interface enhancements. Austin is going to demo all of that next.
+
+
+--------------------------------------------
+
+This is DJ Again...
+So as we finished the first phase of the application development, there are still few things to be addressed before the application becomes available for the end users apart from the minor issues.
+
+	- The development team followed the basic flutter standards while writing the code. However, because of the time limit and the lack of experience, there are a few places where the code needs improvement to match the professional standards. 
+	- Also to make the components reuseable, the services may use some refactoring
+	- Errors and exceptions are inevitable during the actual use of the application. When the app is delivered to the beta users, it will require the development effort to address some of the production maintenance issues.
+	- Finally, since Mnemosyne app uses Google cloud for the speech transcription, there will be a nominal amount of charge when it crosses the free tier limit every month. It will require the cloud watch notifications setup to the concerned sponsoring users when the bill is over a certain amount.
+
+That is it from the team Charlie's presentation. Thank you.
