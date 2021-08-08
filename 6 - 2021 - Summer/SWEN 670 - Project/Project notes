@@ -1,0 +1,52 @@
+https://github.com/CasperPas/flutter-sound-stream/tree/master/example
+
+https://medium.com/tensult/how-to-convert-speech-to-text-on-aws-bc3712b86378
+
+https://pub.dev/packages/aws_transcribe_api/example
+
+
+https://www.youtube.com/watch?v=-LoGnDMKesw
+
+https://github.com/aws-amplify/amplify-flutter/tree/master/example
+
+
+https://www.youtube.com/watch?v=WJKKEZu_xnY&list=PL5h37q2DJtAP36eI9j9yKxbZBASUMb9eZ&index=18
+
+
+GOOGLE SPEECH
+
+https://pub.dev/packages/google_speech
+
+
+umgc.swen670.charlie@gmail.com
+charlie@670
+
+
+Batch job
+https://www.youtube.com/watch?v=aiuvZLZuAjQ 
+
+
+Speech diarization
+https://cloud.google.com/speech-to-text/docs/multiple-voices
+
+---------------------------------------------------
+1) Speech to text
+	- mic audio stream
+	- convert it to text - google speech-to-text API
+	- pause/resume
+2) Save text - Austin
+	- Save
+	- Retrieve
+3) Encrypt / decrypt
+4) Auto delete - Background task -Didimus
+5) UI changes - Zoom, Bold
+	- Zoom text
+	- Bold
+6) Favorites / PII
+7) Search through the text file - consider PII
+8) Training video - Help section
+9) Deployment tasks - check about the google credential storage / encryption key 
+10) Unit tests
+
+
+---------------------------------------------------
