@@ -1,0 +1,282 @@
+/*** INSERT INTO TABLES **/
+
+ INSERT INTO Product VALUES (DEFAULT, 'Financial Publication1','Financial Publication Desc1','Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Product VALUES (DEFAULT, 'Financial Publication2','Financial Publication Desc2','Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Product VALUES (DEFAULT, 'Financial Publication3','Financial Publication Desc3','Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Product VALUES (DEFAULT, 'Financial Publication4','Financial Publication Desc4','Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Product VALUES (DEFAULT, 'Financial Publication5','Financial Publication Desc5','Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Product VALUES (DEFAULT, 'Financial Publication6','Financial Publication Desc6','Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Product VALUES (DEFAULT, 'Financial Publication7','Financial Publication Desc7','Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Product VALUES (DEFAULT, 'Financial Publication8','Financial Publication Desc8','Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Product VALUES (DEFAULT, 'Financial Publication9','Financial Publication Desc9','Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Product VALUES (DEFAULT, 'Financial Publication10','Financial Publication Desc10','Admin',SYSDATE, 'Admin', SYSDATE);
+ select * from Product;
+
+ INSERT INTO ProductCharge VALUES (DEFAULT, 1,'One-Time Charge','One-Time Charge','One-Time Charge',100,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO ProductCharge VALUES (DEFAULT, 2,'One-Time Charge','One-Time Charge','One-Time Charge',200,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO ProductCharge VALUES (DEFAULT, 3,'One-Time Charge','One-Time Charge','One-Time Charge',300,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO ProductCharge VALUES (DEFAULT, 4,'One-Time Charge','One-Time Charge','One-Time Charge',400,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO ProductCharge VALUES (DEFAULT, 5,'One-Time Charge','One-Time Charge','One-Time Charge',500,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO ProductCharge VALUES (DEFAULT, 6,'One-Time Charge','One-Time Charge','One-Time Charge',600,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO ProductCharge VALUES (DEFAULT, 7,'One-Time Charge','One-Time Charge','One-Time Charge',700,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO ProductCharge VALUES (DEFAULT, 8,'One-Time Charge','One-Time Charge','One-Time Charge',800,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO ProductCharge VALUES (DEFAULT, 9,'One-Time Charge','One-Time Charge','One-Time Charge',900,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO ProductCharge VALUES (DEFAULT, 10,'One-Time Charge','One-Time Charge','One-Time Charge',1000,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO ProductCharge VALUES (DEFAULT, 3,'Recurring Charge','Recurring Charge','Recurring Charge',500,30,'Admin',SYSDATE, 'Admin', SYSDATE);
+ select * from ProductCharge;
+ 
+PROMPT CUSTOMER TABLE INSERT
+INSERT INTO Customer VALUES (DEFAULT, 'Debashis', 'Jena', 'djena@test.com', '12312312333', '1', '38274 Main street',
+ 'test', 'SFO', 'US', '20304', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Customer VALUES (DEFAULT, 'Victor', 'Doe', 'werVictor@test.com', '3456777777', '0', '345 Main street',
+ 'test', 'MD', 'US', '20304', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Customer VALUES (DEFAULT, 'Caelon', 'Tanner', 'tls44@test.com', '2342342345', '1', '38274 Main street',
+ 'test', 'elcity', 'US', '20304', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Customer VALUES (DEFAULT, 'Karen', 'sal', 'test1@test.com', '3453450987', '0', '345 Main street',
+ 'test', 'kingcity', 'US', '20304', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Customer VALUES (DEFAULT, 'test', 'test', 'test2@test.com', '4564564567', '1', '38274 sdf street',
+ 'test', 'lcity', 'US', '20304', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Customer VALUES (DEFAULT, 'test2', 'test2', 'test3@test.com', '2341232345', '0', '345 sdf street',
+ 'test', 't1city', 'US', '20304', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Customer VALUES (DEFAULT, 'test3', 'test3', 'lstest3@test.com', '6784564567', '1', '38274 sdf street',
+ 'test', 't2city', 'US', '20304', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Customer VALUES (DEFAULT, 'Victor', 'Doe', 'Victor@test.com', '3456777777', '0', '345 Main street',
+ 'test', 't3city', 'US', '20304', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Customer VALUES (DEFAULT, 'Debashis', 'Jena', 'djena@test.com', '12312312333', '1', '38274 Main street',
+ 'test', 't4city', 'US', '20304', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Customer VALUES (DEFAULT, 'Victor', 'Doe', 'ewrwerVictor@test.com', '3456777777', '0', '345 Main street',
+ 'test', 't5city', 'US', '20304', 'Admin', SYSDATE, 'Admin', SYSDATE);
+select * from Customer;
+
+INSERT INTO PaymentMethod VALUES (DEFAULT, 1, '4cc1','*********1111', 'visa', '3 street',
+ '', 't5city', 'US', '34504', '1', 'JAN', '2030', 'Admin', SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO PaymentMethod VALUES (DEFAULT, 1, '4cc1','*********4411', 'visa', '3 street',
+ '', 't5city', 'US', '34504', '11', 'JAN', '2030', 'Admin', SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO PaymentMethod VALUES (DEFAULT, 1, '4cc1','*********4411', 'visa', '3 street',
+ '', 't5city', 'US', '34504', '12', 'JAN', '2030', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO PaymentMethod VALUES (DEFAULT, 2, '5cc1','*********6789', 'MasterCard', '4 street',
+ '', 't6city', 'US', '36604', '2', 'JAN', '2050', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO PaymentMethod VALUES (DEFAULT, 3, '6cc1','*********6789', 'visa', '5 street',
+ '', 't7city', 'US', '35304', '4', 'JAN', '2060', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO PaymentMethod VALUES (DEFAULT, 4, '3cc1','*********0987', 'visa', '6 street',
+ '', 't8city', 'US', '45304', '4', 'JAN', '2070', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO PaymentMethod VALUES (DEFAULT, 5, '1cc1','********1233', 'visa', '7 street',
+ '', 't9city', 'US', '67304', '5', 'JAN', '2050', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO PaymentMethod VALUES (DEFAULT, 6, '56cc1','*********1233', 'MasterCard', '8 street',
+ '', 't12city', 'US', '66304', '6', 'JAN', '2020', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO PaymentMethod VALUES (DEFAULT, 7, 'qwecc1','*********0987', 'visa', '9 street',
+ '', 't35city', 'US', '567304', '7', 'JAN', '2330', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO PaymentMethod VALUES (DEFAULT, 8, '234cc1','*********2343', 'MasterCard', '32 street',
+ '', 't4city', 'US', '23404', '8', 'JAN', '2032', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO PaymentMethod VALUES (DEFAULT, 9, '67894cc1','*********0987', 'visa', '45 street',
+ '', 't66city', 'US', '45304', '9', 'JAN', '2430', 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO PaymentMethod VALUES (DEFAULT, 10, '12cc1','*********0987', 'Amex', '34 street',
+ '', 't45city', 'US', '34404', '10', 'JAN', '2530', 'Admin', SYSDATE, 'Admin', SYSDATE);
+select * from PaymentMethod;
+ 
+ INSERT INTO Subscription VALUES (DEFAULT, 1, SYSDATE, SYSDATE + 365,'Termed',  'Active', 'sub1',1, 365,'Admin',
+ SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Subscription VALUES (DEFAULT,2, SYSDATE,  SYSDATE + 365,'Termed', 'Active','sub2', 2,365, 'Admin',
+ SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Subscription VALUES (DEFAULT, 3, SYSDATE,  SYSDATE + 365,'Termed','Active','sub3', 3,365,'Admin',
+ SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Subscription VALUES (DEFAULT,4, SYSDATE,  SYSDATE + 365,'Termed','Active','sub4', 4,365,'Admin',
+ SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Subscription VALUES (DEFAULT,5, SYSDATE,  SYSDATE + 365,'Termed', 'Active', 'sub5',5,365,'Admin',
+ SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Subscription VALUES (DEFAULT,6, SYSDATE,  SYSDATE + 365,'Termed','Active', 'sub6',6,365,'Admin',
+ SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Subscription VALUES (DEFAULT,7, SYSDATE,  SYSDATE + 365,'Termed','Active', 'sub7',7,365,'Admin',
+ SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Subscription VALUES (DEFAULT,8, SYSDATE,  SYSDATE + 365,'Termed','Active','sub8', 8,365,'Admin',
+ SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Subscription VALUES (DEFAULT,9, SYSDATE,  SYSDATE + 365,'Termed','Active', 'sub9',9,365,'Admin',
+ SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Subscription VALUES (DEFAULT,10, SYSDATE,  SYSDATE + 365,'Termed','Active','sub10', 10,365,'Admin',
+ SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Subscription VALUES (DEFAULT, 1, SYSDATE,  SYSDATE + 365,'Termed','Active', 'sub11', 2,365,'Admin',
+ SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Subscription VALUES (DEFAULT, 2, SYSDATE,  SYSDATE + 365,'Termed','Active', 'sub11', 2,365,'Admin',
+ SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Subscription VALUES (DEFAULT, 6, SYSDATE - 385,  SYSDATE  - 20,'Termed','Active', 'sub11', 2,365,'Admin',
+ SYSDATE, 'Admin', SYSDATE);
+ select * from Subscription;
+
+ INSERT INTO Invoice VALUES (DEFAULT, 1,100,0,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Invoice VALUES (DEFAULT, 2,200,0,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Invoice VALUES (DEFAULT, 3,300,0,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Invoice VALUES (DEFAULT, 4,400,0,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Invoice VALUES (DEFAULT, 5,500,0,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Invoice VALUES (DEFAULT, 6,600,0,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Invoice VALUES (DEFAULT, 7,700,0,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Invoice VALUES (DEFAULT, 8,800,0,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Invoice VALUES (DEFAULT, 9,900,0,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Invoice VALUES (DEFAULT, 10,1000,0,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO Invoice VALUES (DEFAULT, 12,200,100,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ select * from Invoice;
+
+ INSERT INTO SubscriptionProductCharge VALUES (DEFAULT, 1,1,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO SubscriptionProductCharge VALUES (DEFAULT, 2,2,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO SubscriptionProductCharge VALUES (DEFAULT, 3,3,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO SubscriptionProductCharge VALUES (DEFAULT, 4,4,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO SubscriptionProductCharge VALUES (DEFAULT, 5,5,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO SubscriptionProductCharge VALUES (DEFAULT, 6,6,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO SubscriptionProductCharge VALUES (DEFAULT, 7,7,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO SubscriptionProductCharge VALUES (DEFAULT, 8,8,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO SubscriptionProductCharge VALUES (DEFAULT, 9,9,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO SubscriptionProductCharge VALUES (DEFAULT, 10,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO SubscriptionProductCharge VALUES (DEFAULT, 5,11,'Admin',SYSDATE, 'Admin', SYSDATE);
+ INSERT INTO SubscriptionProductCharge VALUES (DEFAULT, 13,11,'Admin',SYSDATE, 'Admin', SYSDATE);
+ select * from SubscriptionProductCharge;
+
+INSERT INTO Payment VALUES (DEFAULT, 1,1,100,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Payment VALUES (DEFAULT, 2,2,200,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Payment VALUES (DEFAULT, 3,3,300,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Payment VALUES (DEFAULT, 4,4,400,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Payment VALUES (DEFAULT, 5,5,500,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Payment VALUES (DEFAULT, 6,6,600,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Payment VALUES (DEFAULT, 7,7,700,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Payment VALUES (DEFAULT, 8,8,800,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Payment VALUES (DEFAULT, 9,9,900,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Payment VALUES (DEFAULT, 10,10,1000,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+INSERT INTO Payment VALUES (DEFAULT, 2,11,100,10,'Admin',SYSDATE, 'Admin', SYSDATE);
+
+commit;
+
+/** Queries **/
+/** 1. Query 1: Select all columns and all rows from one table  **/
+select * from payment;
+
+/** 2. Select five columns and all rows from one table **/
+select firstname, lastname, email, phonenumber, address1 from customer;
+
+/** 3. Query 3: Select all columns from all rows from one view  **/
+select * from Customer_Subscription_View;
+
+/** 4. Query 4: Using a join on 2 tables, select all columns and all rows from the tables without the use of a Cartesian product **/
+SELECT  p.ProductName, p.ProductDescription, 
+c.ProductChargeName, c.ProductChargeType, Amount, TaxAmount
+FROM   Product p
+JOIN   ProductCharge c
+ON     p.ProductId = c.ProductId;
+
+/**5: Query 5: Select and order data retrieved from one table  **/
+Select * from Invoice order by Amount desc;
+
+/**6: Query 6: Using a join on 3 tables, select 5 columns from the 3 tables. Use syntax that would limit the output to 10 rows **/
+Select CONCAT (CONCAT (c.FirstName, ' '), c.LastName) Name, s.TermType, s.Status, i.Amount, i.TaxAmount
+from Customer c 
+join Subscription s
+on c.CustomerId = s.CustomerId 
+join Invoice i 
+on s.SubscriptionId = i.SubscriptionId
+fetch first 10 rows only;
+
+/**7. Query 7: Select distinct rows using joins on 3 tables **/
+Select distinct s.CustomerId, s.Status, i.Amount invoiceAmount, i.TaxAmount invoiceTaxAmount, p.PaymentAmount + p.TaxAmount TotalPaymentAmount, p.CreatedDate paymentCreatedDate
+from Subscription s 
+join Invoice i
+on s.SubscriptionId = i.SubscriptionId 
+join Payment p
+on i.InvoiceId = p.InvoiceId;
+
+/**8. Query 8: Use GROUP BY and HAVING in a select statement using one or more tables **/
+select distinct c.CustomerId, Count(p.PaymentRefId) CountOfPaymentMethod  from 
+Customer c 
+join PaymentMethod p 
+on C.CustomerId = p.CustomerId 
+group by c.CustomerId
+having c.CustomerId = 1;
+
+/**9. Query 9: Use IN clause to select data from one or more tables **/
+select p.CCNumber, p.CCType, p.CCName, p.CCExpiryMonth, CCExpiryYear  from 
+Customer c 
+join PaymentMethod p 
+on c.CustomerId = p.CustomerId
+where c.CustomerId in (1,2);
+
+/**10. Query 10: Select length of one column from one table (use LENGTH function) **/
+Select CCNumber, Length('CCNumber') from PaymentMethod;
+
+/**11. Query 11: Delete one record from one table. Use select statements to demonstrate the table contents before and after the DELETE
+statement. Make sure you use ROLLBACK afterwards so that the data will not be physically removed  **/
+delete from paymentmethod where paymentmethodid = 3;
+select * from paymentmethod where paymentmethodid = 3;
+ROLLBACK;
+select * from paymentmethod where paymentmethodid = 3;
+
+/**12. Query 12: Update one record from one table. Use select statements to demonstrate the table contents before and after the
+UPDATE statement. Make sure you use ROLLBACK afterwards so that the data will not be physically removed **/
+select CCExpiryYear from paymentmethod where paymentmethodid = 3;
+Update paymentmethod Set CCExpiryYear = '2012' where paymentmethodid = 3;
+select CCExpiryYear from paymentmethod where paymentmethodid = 3;
+ROLLBACK;
+
+/**Advanced Queries **/
+
+/**1. Find all Customers who subscribed to Product Financial Publication7, Financial Publication8. Using subquery. **/
+Select CONCAT (CONCAT (c.FirstName, ' '), c.LastName) Name, c.Address1, c.City, c.PostalCode, c.Country from 
+Customer c 
+join Subscription s 
+on c.CustomerId = s.CustomerId
+where s.ProductId in (Select ProductId from Product 
+where ProductName in ('Financial Publication7','Financial Publication8'));
+
+/**2. Find How much each customer spent. **/
+Select distinct c.CustomerId,CONCAT (CONCAT (c.FirstName, ' '), c.LastName) Name, Sum(i.Amount) from Customer c 
+join Subscription s on c.CustomerId = s.CustomerId
+join Invoice i on s.SubscriptionId = i.SubscriptionId
+join Payment p on i.InvoiceId = p.InvoiceId 
+group by c.CustomerId, CONCAT (CONCAT (c.FirstName, ' '), c.LastName) order by Sum(i.Amount) desc;
+
+/** 3. Find Customers who has not paid full balance **/
+Select distinct c.CustomerId, 
+(Sum(nvl(i.Amount,0))- Sum(nvl(p.PaymentAmount,0))) BalanceAmount  from Customer c 
+join Subscription s on c.CustomerId = s.CustomerId
+join Invoice i on s.SubscriptionId = i.SubscriptionId
+left join Payment p on i.InvoiceId = p.InvoiceId 
+group by c.CustomerId 
+having 
+(Sum(nvl(i.Amount,0))- Sum(nvl(p.PaymentAmount,0))) > 0;
+
+/** 4. For each subscription find total invoice amount and total payment amount **/
+Select distinct s.SubscriptionId, 
+  Sum(nvl(i.Amount,0)) TotalInvoiceAmount,
+  Sum(nvl(p.PaymentAmount,0)) TotalPaymentAmount
+  from Subscription s 
+join Invoice i on s.SubscriptionId = i.SubscriptionId
+left join Payment p on i.InvoiceId = p.InvoiceId 
+group by s.SubscriptionId;
+
+/** 5. List all products which are greater than average price **/
+select p.ProductId, p.ProductName, AVG(pc.Amount) from product p join ProductCharge pc 
+on p.ProductId = pc.ProductId 
+Group by p.ProductId, p.ProductName 
+having AVG(pc.Amount) > (Select AVG(pc.Amount)  from productcharge pc) order by AVG(pc.Amount) asc;
+
+/** 6. Find all Customers who bought products less than average price **/
+Select distinct c.CustomerId, CONCAT (CONCAT (c.FirstName, ' '), c.LastName) Name from 
+Customer c join Subscription s on c.CustomerId = s.CustomerId 
+where s.productId in (select p.ProductId from product p join ProductCharge pc 
+on p.ProductId = pc.ProductId 
+Group by p.ProductId
+having AVG(pc.Amount) < (Select AVG(pc.Amount)  from productcharge pc));
+
+/** 7 Find all Products that have more than 1 charge **/
+Select s.SubscriptionId,  p.ProductId, Count(pc.ProductId) ChargesCount from Subscription s 
+join Product p on s.ProductId = p.ProductId
+join ProductCharge pc on p.ProductId = pc.ProductId 
+group by s.SubscriptionId, p.ProductId
+having  p.ProductId in
+(select ProductId from 
+ProductCharge pc group by pc.ProductId
+having Count(pc.ProductId) > 1);
+
+/** 8 Get all the Recurring  charges that are due to be billed for the customer*/
+/** Find all subscription that are to be billed for recurring charge **/
+select s.SubscriptionId, pc.Amount AmountTobeCharged, s.TermEndDate, c.CustomerId, pm.PaymentRefId from Customer c 
+Join PaymentMethod pm on c.CustomerId = pm.CustomerId 
+Join Subscription s on c.CustomerId = s.CustomerId 
+Join SubscriptionProductCharge spc on s.SubscriptionId = spc.SubscriptionId
+Join ProductCharge pc on spc.ProductChargeId = pc.ProductChargeId 
+where pc.ProductChargeType = 'Recurring Charge' and SYSDATE  >  (s.TermStartDate + s.TermDays);

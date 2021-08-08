@@ -1,0 +1,191 @@
+/*** INSERT INTO TABLES **/
+INSERT INTO CATALOG
+VALUES (DEFAULT, 'Way of Kings',
+        'Fantasy', 'Tor Books', TO_DATE('31082010', 'DDMMYYYY'), 'Book', '9780765365279',
+        '1,280', 0, 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO CATALOG
+VALUES (DEFAULT, 'Words of Radiance',
+        'Fantasy', 'Tor Books', TO_DATE('04032014', 'DDMMYYYY'), 'Book',
+        '9780765365286', '1,328', 0, 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO CATALOG
+VALUES (DEFAULT, 'Inception',
+        'Science', 'Fiction/Thriller', TO_DATE('08072010', 'DDMMYYYY'), 'DVD',
+        '', '', '2:28', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO CATALOG
+VALUES (DEFAULT, 'Infinite Jest',
+        'Tragicomedy', 'Brown, Little, and Co.', TO_DATE('02011996', 'DDMMYYYY'), 'BOOK',
+        '9780316066525', '1,079', '', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO CATALOG
+VALUES (DEFAULT, 'La La Land',
+        'Musical', 'Summit Entertainment', TO_DATE('09122016', 'DDMMYYYY'), 'DVD',
+        '', '', '2:08', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO CATALOG
+VALUES (DEFAULT, 'Moonrise Kingdom',
+        'Drama Comedy', 'Focus Features', TO_DATE('25052012', 'DDMMYYYY'), 'DVD',
+        '', '', '1:34', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO CATALOG
+VALUES (DEFAULT, 'The Name of the Wind',
+        'Fantasy', 'DAW Books', TO_DATE('27032007', 'DDMMYYYY'), 'BOOK',
+        '9780756404079', '722', '', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO CATALOG
+VALUES (DEFAULT, 'The Social Network',
+        'Drama', 'Columbia Pictures', TO_DATE('01102010', 'DDMMYYYY'), 'DVD',
+        '', '', '2:01', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+
+INSERT INTO LIBRARY
+VALUES (DEFAULT, 'New York Public Library',
+        '212-555-1234', '476 5th Avenue', '', 'New York', 'NY', '21033', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+
+INSERT INTO LIBRARY
+VALUES (DEFAULT, 'Baltimore County Library',
+        '443-555-3456', '320 York Road', '', 'Towson', 'MD', '23544', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+
+INSERT INTO LIBRARY
+VALUES (DEFAULT, 'UMUC Library',
+        '240-684-2020', '1616 McCormick Dr', '', 'Largo', 'MD', '24485', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+
+INSERT INTO CUSTOMER
+VALUES (DEFAULT, 'Christian',
+        'Walker', '96 Clark Drive', '', 'Hicksvile', 'NY', '11801', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO CUSTOMER
+VALUES (DEFAULT, 'Deena',
+        'Pilgrim', '838 Orange Street', '', 'Frederick', 'MD', '21701', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO CUSTOMER
+VALUES (DEFAULT, 'Calista',
+        'Secor', '9330 El Dorado Lane', '', 'Temple Hills', 'MD', '20748', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO CUSTOMER
+VALUES (DEFAULT, 'Emile',
+        'Cross', '387 Circle Ave', '', 'Vincentown', 'NJ', '08088', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO CUSTOMER
+VALUES (DEFAULT, 'Johnny',
+        'Royalle', '9948 Campfire Drive	East', '', 'Elmhurst', 'NJ', '11369', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO CUSTOMER
+VALUES (DEFAULT, 'Harley',
+        'Cohen', '96 Vine Street', '', 'Bowie', 'MD', '20715', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+
+INSERT INTO BRANCH
+VALUES (DEFAULT, 1,
+        '125th Street Library', '212-555-2345', '224 E 125th St', '', 'New York', 'NY', '20715', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO BRANCH
+VALUES (DEFAULT, 1,
+        'Grand Central Library', '212-555-3456', '135 E 46th St', '', 'New York', 'NY', '20345', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO BRANCH
+VALUES (DEFAULT, 2,
+        'Essex Branch', '443-555-4567', '1100 Eastern Blvd', '', 'Essex', 'MD', '23465', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO BRANCH
+VALUES (DEFAULT, 2,
+        'Woodlawn Branch', '443-555-5678', '1811 Woodlawn Dr,', '', 'Woodlawn', 'MD', '12345', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO BRANCH
+VALUES (DEFAULT, 3,
+        'UMUC Library Largo', '240-684-2020', '1616 McCormick Dr', '', 'Largo', 'MD', '11125', 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+
+INSERT INTO BRANCHITEM
+VALUES (DEFAULT, 1, 1, 1, TO_DATE('01022011', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO BRANCHITEM
+VALUES (DEFAULT, 1, 1, 2, TO_DATE('15032021', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO BRANCHITEM
+VALUES (DEFAULT, 2, 2, 1, TO_DATE('01022011', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO BRANCHITEM
+VALUES (DEFAULT, 2, 2, 2, TO_DATE('15032021', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO BRANCHITEM
+VALUES (DEFAULT, 3, 3, 1, TO_DATE('01022011', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO BRANCHITEM
+VALUES (DEFAULT, 3, 3, 2, TO_DATE('15032021', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO BRANCHITEM
+VALUES (DEFAULT, 4, 4, 1, TO_DATE('01022011', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO BRANCHITEM
+VALUES (DEFAULT, 4, 4, 2, TO_DATE('15032021', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO BRANCHITEM
+VALUES (DEFAULT, 5, 5, 1, TO_DATE('01022011', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO BRANCHITEM
+VALUES (DEFAULT, 5, 5, 2, TO_DATE('15032021', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+
+INSERT INTO BRANCHITEM
+VALUES (DEFAULT, 1, 8, 4, TO_DATE('01022011', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+INSERT INTO BRANCHITEM
+VALUES (DEFAULT, 2, 7, 1, TO_DATE('15032021', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+
+INSERT INTO LIBRARYCUSTOMER
+VALUES (DEFAULT, 1, 1, 1123123123, 1233, TO_DATE('15032025', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+
+INSERT INTO LIBRARYCUSTOMER
+VALUES (DEFAULT, 2, 2, 3434534555, 5678, TO_DATE('15032025', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+
+INSERT INTO LIBRARYCUSTOMER
+VALUES (DEFAULT, 2, 3, 3434534555, 5678, TO_DATE('15032030', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+
+INSERT INTO LIBRARYCUSTOMER
+VALUES (DEFAULT, 1, 4, 342345677, 5678, TO_DATE('15032045', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+
+INSERT INTO LIBRARYCUSTOMER
+VALUES (DEFAULT, 1, 5, 44442345655, 5678, TO_DATE('15032021', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+
+INSERT INTO LIBRARYCUSTOMER
+VALUES (DEFAULT, 3, 6, 765432113444, 5678, TO_DATE('15032023', 'DDMMYYYY'), 'Admin',
+        SYSDATE, 'Admin', SYSDATE);
+
+-- Transactions
+INSERT INTO TRANSACTION
+VALUES (DEFAULT, 1, 1, TO_DATE('15032020', 'DDMMYYYY'), TO_DATE('1502020', 'DDMMYYYY'),
+        NULL, 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO TRANSACTION
+VALUES (DEFAULT, 2, 1, TO_DATE('15032019', 'DDMMYYYY'), TO_DATE('15042019', 'DDMMYYYY'),
+        TO_DATE('1504019', 'DDMMYYYY'), 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO TRANSACTION
+VALUES (DEFAULT, 5, 2, TO_DATE('15032020', 'DDMMYYYY'), TO_DATE('1502020', 'DDMMYYYY'),
+        NULL, 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO TRANSACTION
+VALUES (DEFAULT, 6, 2, TO_DATE('15032020', 'DDMMYYYY'), TO_DATE('1502020', 'DDMMYYYY'),
+        NULL, 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO TRANSACTION
+VALUES (DEFAULT, 7, 2, TO_DATE('15032020', 'DDMMYYYY'), TO_DATE('1502020', 'DDMMYYYY'),
+        NULL, 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO TRANSACTION
+VALUES (DEFAULT, 9, 3, TO_DATE('15032020', 'DDMMYYYY'), TO_DATE('1502020', 'DDMMYYYY'),
+        NULL, 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO TRANSACTION
+VALUES (DEFAULT, 10, 3, TO_DATE('15032020', 'DDMMYYYY'), TO_DATE('1502020', 'DDMMYYYY'),
+        NULL, 'Admin', SYSDATE, 'Admin', SYSDATE);
+INSERT INTO TRANSACTION
+VALUES (DEFAULT, 7, 3, TO_DATE('15032020', 'DDMMYYYY'), TO_DATE('1502020', 'DDMMYYYY'),
+        NULL, 'Admin', SYSDATE, 'Admin', SYSDATE);
+COMMIT; 

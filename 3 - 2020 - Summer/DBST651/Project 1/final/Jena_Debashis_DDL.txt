@@ -1,0 +1,632 @@
+SET ECHO ON
+SET SERVEROUTPUT ON;
+
+DROP VIEW Product_Charge_View;
+DROP VIEW Customer_Subscription_View;
+
+
+DROP TRIGGER CustomerSequence_Trg;
+DROP TRIGGER PaymentMethodSequence_Trg;
+DROP TRIGGER SubscriptionSequence_Trg;
+DROP TRIGGER InvoiceSequence_Trg;
+DROP TRIGGER ProductChargeSequence_Trg;
+DROP TRIGGER ProductSequence_Trg;
+DROP TRIGGER SubscriptionProductChargeSequence_Trg;
+DROP TRIGGER PaymentSequence_Trg;
+DROP TRIGGER SubscriptionAudit_Trg;
+DROP TRIGGER ProductCharge_Trg;
+
+DROP TABLE Payment CASCADE CONSTRAINTS;
+DROP TABLE SubscriptionProductCharge CASCADE CONSTRAINTS;
+DROP TABLE ProductCharge CASCADE CONSTRAINTS;
+DROP TABLE Product CASCADE CONSTRAINTS;
+DROP TABLE Invoice CASCADE CONSTRAINTS;
+DROP TABLE Subscription CASCADE CONSTRAINTS;
+DROP TABLE PaymentMethod CASCADE CONSTRAINTS;
+DROP TABLE Customer CASCADE CONSTRAINTS;
+DROP TABLE SubscriptionAudit CASCADE CONSTRAINTS;
+DROP TABLE ProductChargeAudit CASCADE CONSTRAINTS;
+
+PROMPT === Drop Sequences ===
+DROP SEQUENCE PaymentId_Seq;
+DROP SEQUENCE SubscriptionProductChargeId_Seq;
+DROP SEQUENCE ProductId_Seq;
+DROP SEQUENCE ProductChargeId_Seq;
+DROP SEQUENCE InvoiceId_Seq;
+DROP SEQUENCE SubscriptionId_Seq;
+DROP SEQUENCE PaymentMethodId_Seq;
+DROP SEQUENCE CustomerId_Seq;
+
+/** Creating Tables **/
+PROMPT Creating Table 'Customer'
+CREATE TABLE Customer
+ (CustomerId NUMBER(8,0)
+ ,FirstName VARCHAR2(25)
+ ,LastName VARCHAR2(25)
+ ,Email VARCHAR2(50)
+ ,PhoneNumber VARCHAR2(15)
+ ,AutoPay Char(1)
+ ,Address1 VARCHAR2(50)
+ ,Address2 VARCHAR2(50)
+ ,City VARCHAR2(50)
+ ,Country VARCHAR2(50)
+ ,PostalCode VARCHAR2(20)
+ ,CreatedBy VARCHAR2(30)
+ ,CreatedDate DATE
+ ,ModifiedBy VARCHAR2(30)
+ ,ModifiedDate DATE
+ );
+
+PROMPT Creating Table 'PaymentMethod'
+CREATE TABLE PaymentMethod
+ (PaymentMethodId NUMBER(8,0)
+ ,CustomerId NUMBER(8,0)
+ ,CCName VARCHAR2(25)
+ ,CCNumber VARCHAR2(25)
+ ,CCType VARCHAR2(10)
+ ,Address1 VARCHAR2(50)
+ ,Address2 VARCHAR2(50)
+ ,City VARCHAR2(50)
+ ,Country VARCHAR2(50)
+ ,PostalCode VARCHAR2(20)
+ ,PaymentRefId VARCHAR2(50)
+ ,CCExpiryMonth VARCHAR2(20)
+ ,CCExpiryYear VARCHAR2(20)
+ ,CreatedBy VARCHAR2(30)
+ ,CreatedDate DATE
+ ,ModifiedBy VARCHAR2(30)
+ ,ModifiedDate DATE
+ );
+
+PROMPT Creating Table 'Subscription'
+CREATE TABLE Subscription
+ (SubscriptionId NUMBER(8,0)
+ ,CustomerId NUMBER(8,0)
+ ,TermStartDate DATE
+ ,TermEndDate DATE
+ ,TermType VARCHAR2(50)
+ ,Status VARCHAR2(10)
+ ,Name VARCHAR2(50)
+ ,ProductId NUMBER(8,0)
+ ,TermDays NUMBER(8,0)
+ ,CreatedBy VARCHAR2(30)
+ ,CreatedDate DATE
+ ,ModifiedBy VARCHAR2(30)
+ ,ModifiedDate DATE
+ );
+ 
+PROMPT Creating Table 'Invoice'
+CREATE TABLE Invoice
+ (InvoiceId NUMBER(8,0)
+ ,SubscriptionId NUMBER(8,0)
+ ,Amount NUMBER(9,2)
+ ,BalanceAmount  NUMBER(9,2)
+ ,TaxAmount   NUMBER(9,2)
+ ,CreatedBy VARCHAR2(30)
+ ,CreatedDate DATE
+ ,ModifiedBy VARCHAR2(30)
+ ,ModifiedDate DATE
+ );
+
+PROMPT Creating Table 'Product'
+CREATE TABLE Product
+ (ProductId NUMBER(8,0)
+ ,ProductName VARCHAR2(50)
+ ,ProductDescription VARCHAR2(50)
+ ,CreatedBy VARCHAR2(30)
+ ,CreatedDate DATE
+ ,ModifiedBy VARCHAR2(30)
+ ,ModifiedDate DATE
+ );
+
+PROMPT Creating Table 'ProductCharge'
+CREATE TABLE ProductCharge
+ (ProductChargeId NUMBER(8,0)
+ ,ProductId NUMBER(8,0)
+ ,ProductChargeName VARCHAR2(50)
+ ,ProductChargeDescription VARCHAR2(50)
+ ,ProductChargeType VARCHAR2(50)
+ ,Amount NUMBER(9,2)
+ ,TaxAmount NUMBER(9,2)
+ ,CreatedBy VARCHAR2(30)
+ ,CreatedDate DATE
+ ,ModifiedBy VARCHAR2(30)
+ ,ModifiedDate DATE
+ );
+
+PROMPT Creating Table 'SubscriptionProductCharge'
+CREATE TABLE SubscriptionProductCharge
+ (SubscriptionProductChargeId NUMBER(8,0)
+ ,SubscriptionId NUMBER(8,0)
+ ,ProductChargeId NUMBER(8,0)
+ ,CreatedBy VARCHAR2(30)
+ ,CreatedDate DATE
+ ,ModifiedBy VARCHAR2(30)
+ ,ModifiedDate DATE
+ );
+ 
+PROMPT Creating Table 'Payment'
+CREATE TABLE Payment
+ (PaymentId NUMBER(8,0)
+ ,PaymentMethodId NUMBER(8,0)
+ ,InvoiceId NUMBER(8,0)
+ ,PaymentAmount NUMBER(9,2)
+ ,TaxAmount NUMBER(9,2)
+ ,CreatedBy VARCHAR2(30)
+ ,CreatedDate DATE
+ ,ModifiedBy VARCHAR2(30)
+ ,ModifiedDate DATE
+ );
+ 
+PROMPT Creating Table 'ProductCharge_Audit'
+CREATE TABLE ProductChargeAudit (
+      ProductChargeAuditId  NUMBER,
+      ModifiedBy VARCHAR2(30),
+      ModifiedDate DATE
+);
+
+PROMPT Creating Table 'Subscription_Audit'
+CREATE TABLE SubscriptionAudit (
+      SubscriptionAuditId  NUMBER,
+      ModifiedBy VARCHAR2(30),
+      ModifiedDate DATE
+);
+
+
+--  Creatng Indexes
+
+PROMPT Creating Index 'Cust_PMethod_FK_I'
+CREATE INDEX Cust_PMethod_FK_I ON PaymentMethod
+ (CustomerId);
+/
+
+PROMPT Creating Index 'Sub_Inv_FK_I'
+CREATE INDEX Sub_Inv_FK_I ON Invoice
+ (SubscriptionId);
+/
+
+PROMPT Creating Index 'Inv_Pmt_FK_I'
+CREATE INDEX Inv_Pmt_FK_I ON Payment
+ (InvoiceId);
+/
+
+PROMPT Creating Index 'Sub_productCharge_FK_I'
+CREATE INDEX Sub_ProductCharge_FK_I ON SubscriptionProductCharge
+ (SubscriptionId);
+/
+
+
+PROMPT Creating Index 'Cust_Sub_FK_I'
+CREATE INDEX Cust_Sub_FK_I ON Subscription
+ (CustomerId);
+/
+
+PROMPT Creating Index 'Prod_Sub_FK_I'
+CREATE INDEX Prod_Sub_FK_I ON Subscription
+ (ProductId);
+/
+--PROMPT subscription.con
+
+PROMPT Creating Check Constraints on 'Customer'
+ALTER TABLE Customer
+ MODIFY(ModifiedBy CONSTRAINT Cust_Modified_By_NNull NOT NULL)
+ MODIFY(CreatedBy CONSTRAINT Cust_Created_By_NNull NOT NULL)
+ MODIFY(CreatedDate CONSTRAINT Cust_Created_Date_NNull NOT NULL)
+ MODIFY(ModifiedDate CONSTRAINT Cust_Modified_Date_NNull NOT NULL);
+/
+
+
+PROMPT Creating Check Constraints on 'PaymentMethod'
+ALTER TABLE PaymentMethod
+ MODIFY(CCName CONSTRAINT PMethod_CCName_NNull NOT NULL)
+ MODIFY(CCNumber CONSTRAINT PMethod_CCNumber_NNull NOT NULL)
+ MODIFY(CCType CONSTRAINT PMethod_CCType_NNull NOT NULL)
+ MODIFY(PaymentRefId CONSTRAINT PMethod_PaymentRefId_NNull NOT NULL)
+ MODIFY(Address1 CONSTRAINT PMethod_Address1_NNull NOT NULL)
+ MODIFY(City CONSTRAINT PMethod_City_NNull NOT NULL)
+ MODIFY(Country CONSTRAINT PMethod_Country_NNull NOT NULL)
+ MODIFY(PostalCode CONSTRAINT PMethod_PostalCode_NNull NOT NULL)
+ MODIFY(CCExpiryMonth CONSTRAINT PMethod_CCExpiryMonth_NNull NOT NULL)
+ MODIFY(CCExpiryYear CONSTRAINT PMethod_CCExpiryYear_NNull NOT NULL)
+ MODIFY(CustomerId CONSTRAINT PMethod_Customer_Id_NNull NOT NULL)
+ MODIFY(ModifiedBy CONSTRAINT PMethod_Modified_By_NNull NOT NULL)
+ MODIFY(CreatedBy CONSTRAINT PMethod_Created_By_NNull NOT NULL)
+ MODIFY(CreatedDate CONSTRAINT PMethod_Created_Date_NNull NOT NULL)
+ MODIFY(ModifiedDate CONSTRAINT PMethod_Modified_Date_NNull NOT NULL);
+/
+ 
+PROMPT Creating Check Constraints on 'Subscription'
+ALTER TABLE Subscription
+ MODIFY(Name CONSTRAINT Sub_Name_NNull NOT NULL)
+ MODIFY(TermType CONSTRAINT Sub_TermType_NNull NOT NULL)
+ MODIFY(TermEndDate CONSTRAINT Sub_TermEndDate_NNull NOT NULL)
+ MODIFY(TermStartDate CONSTRAINT Sub_TermStartDate_NNull NOT NULL)
+ MODIFY(ModifiedBy CONSTRAINT Sub_Modified_By_NNull NOT NULL)
+ MODIFY(CreatedBy CONSTRAINT Sub_Created_By_NNull NOT NULL)
+ MODIFY(CreatedDate CONSTRAINT Sub_Created_Date_NNull NOT NULL)
+ MODIFY(ModifiedDate CONSTRAINT Sub_Modified_Date_NNull NOT NULL);
+/
+
+PROMPT Creating Check Constraints on 'Invoice'
+ALTER TABLE Invoice
+ MODIFY(SubscriptionId CONSTRAINT Inv_Sub_Id_NNull NOT NULL)
+ MODIFY(ModifiedBy CONSTRAINT Inv_Modified_By_NNull NOT NULL)
+ MODIFY(CreatedBy CONSTRAINT Inv_Created_By_NNull NOT NULL)
+ MODIFY(CreatedDate CONSTRAINT Inv_Created_Date_NNull NOT NULL)
+ MODIFY(ModifiedDate CONSTRAINT Inv_Modified_Date_NNull NOT NULL);
+/
+ 
+PROMPT Creating Check Constraints on 'Payment'
+ALTER TABLE Payment
+ MODIFY(InvoiceId CONSTRAINT Pmt_Inv_Id_NNull NOT NULL)
+ MODIFY(ModifiedBy CONSTRAINT Pmt_Modified_By_NNull NOT NULL)
+ MODIFY(CreatedBy CONSTRAINT Pmt_Created_By_NNull NOT NULL)
+ MODIFY(CreatedDate CONSTRAINT Pmt_Created_Date_NNull NOT NULL)
+ MODIFY(ModifiedDate CONSTRAINT Pmt_Modified_Date_NNull NOT NULL);
+/
+
+
+PROMPT Creating Check Constraints on 'Product'
+ALTER TABLE Product
+ MODIFY(ModifiedBy CONSTRAINT Prd_Modified_By_NNull NOT NULL)
+ MODIFY(CreatedBy CONSTRAINT Prd_Created_By_NNull NOT NULL)
+ MODIFY(CreatedDate CONSTRAINT Prd_Created_Date_NNull NOT NULL)
+ MODIFY(ModifiedDate CONSTRAINT Prd_Modified_Date_NNull NOT NULL);
+/
+
+
+PROMPT Creating Check Constraints on 'ProductCharge'
+ALTER TABLE ProductCharge
+ MODIFY(ProductId CONSTRAINT PrdCharge_Prd_Id_NNull NOT NULL)
+ MODIFY(ModifiedBy CONSTRAINT PrdCharge_Modified_By_NNull NOT NULL)
+ MODIFY(CreatedBy CONSTRAINT PrdCharge_Created_By_NNull NOT NULL)
+ MODIFY(CreatedDate CONSTRAINT PrdCharge_Created_Date_NNull NOT NULL)
+ MODIFY(ModifiedDate CONSTRAINT PrdCharge_Modified_Date_NNull NOT NULL);
+/
+
+
+PROMPT Creating Check Constraints on 'SubscriptionProductCharge'
+ALTER TABLE SubscriptionProductCharge
+ MODIFY(ProductChargeId CONSTRAINT SubPrdCharge_Prd_Id_NNull NOT NULL)
+ MODIFY(ModifiedBy CONSTRAINT SubPrdCharge_Modified_By_NNull NOT NULL)
+ MODIFY(CreatedBy CONSTRAINT SubPrdCharge_Created_By_NNull NOT NULL)
+ MODIFY(CreatedDate CONSTRAINT SubPrdCharge_Created_Date_NNull NOT NULL)
+ MODIFY(ModifiedDate CONSTRAINT SubPrdCharge_Modified_Date_NNull NOT NULL);
+/
+
+PROMPT Creating Check Constraints on 'SubscriptionAudit'
+ALTER TABLE SubscriptionAudit
+ MODIFY(ModifiedBy CONSTRAINT SubAud_Modified_By_NNull NOT NULL)
+ MODIFY(ModifiedDate CONSTRAINT SubAud_Modified_Date_NNull NOT NULL);
+/
+
+PROMPT Creating Check Constraints on 'ProductChargeAudit'
+ALTER TABLE ProductChargeAudit
+ MODIFY(ModifiedBy CONSTRAINT PrdChargeAud_Modified_By_NNull NOT NULL)
+ MODIFY(ModifiedDate CONSTRAINT PrdChargeAud_Modified_Date_NNull NOT NULL);
+/
+
+
+PROMPT Creating Primary Key on 'Customer'
+ALTER TABLE Customer
+ ADD CONSTRAINT Cust_PK PRIMARY KEY
+  (CustomerId);
+/
+
+PROMPT Creating Primary Key on 'PaymentMethod'
+ALTER TABLE PaymentMethod
+  ADD CONSTRAINT PmtMethod_PK PRIMARY KEY
+  (PaymentMethodId);
+/
+
+PROMPT Creating Primary Key on 'Subscription'
+ALTER TABLE Subscription
+ ADD CONSTRAINT Sub_PK PRIMARY KEY
+  (SubscriptionId);
+/
+
+PROMPT Creating Primary Key on 'Invoice'
+ALTER TABLE Invoice
+ ADD CONSTRAINT Inv_PK PRIMARY KEY
+  (InvoiceId);
+/
+
+PROMPT Creating Primary Key on 'Product'
+ALTER TABLE Product
+ ADD CONSTRAINT Prod_PK PRIMARY KEY
+  (ProductId);
+/
+
+PROMPT Creating Primary Key on 'ProductCharge'
+ALTER TABLE ProductCharge
+ ADD CONSTRAINT PCharge_PK PRIMARY KEY
+  (ProductChargeId);
+/
+
+PROMPT Creating Primary Key on 'SubscriptionProductCharge'
+ALTER TABLE SubscriptionProductCharge
+ ADD CONSTRAINT SPC_PK PRIMARY KEY
+  (SubscriptionProductChargeId);
+/
+
+PROMPT Creating Primary Key on 'Payment'
+ALTER TABLE Payment
+ ADD CONSTRAINT Pmt_PK PRIMARY KEY
+  (PaymentId);
+/
+
+PROMPT Creating Primary Key on 'SubscriptionAudit'
+ALTER TABLE SubscriptionAudit
+ ADD CONSTRAINT SubAudit_PK PRIMARY KEY
+  (SubscriptionAuditId);
+/
+
+PROMPT Creating Primary Key on 'ProductChargeAudit'
+ALTER TABLE ProductChargeAudit
+ ADD CONSTRAINT ProdChargeAudit_PK PRIMARY KEY
+  (ProductChargeAuditId);
+/
+
+
+
+PROMPT Creating Foreign Keys on 'PaymentMethod'
+ALTER TABLE PaymentMethod ADD CONSTRAINT
+ Cust_PMethod_FK FOREIGN KEY
+  (CustomerId) REFERENCES Customer
+  (CustomerId);
+/
+
+PROMPT Creating Foreign Keys on 'Invoice'
+ALTER TABLE Invoice ADD CONSTRAINT
+ Sub_Inv_FK FOREIGN KEY
+  (SubscriptionId) REFERENCES Subscription
+  (SubscriptionId);
+/
+
+
+PROMPT Creating Foreign Keys on 'ProductCharge'
+ALTER TABLE ProductCharge ADD CONSTRAINT
+ Pdct_Charge_FK FOREIGN KEY
+  (ProductId) REFERENCES Product
+  (ProductId);
+/
+
+PROMPT Creating Foreign Keys on 'SubscriptionProductCharge'
+ALTER TABLE SubscriptionProductCharge ADD CONSTRAINT
+  Sub_Charge_FK FOREIGN KEY
+  (SubscriptionId) REFERENCES Subscription
+  (SubscriptionId);
+/
+
+ALTER TABLE SubscriptionProductCharge ADD CONSTRAINT
+  Sub_Pdct_Charge_FK FOREIGN KEY
+  (ProductChargeId) REFERENCES ProductCharge
+  (ProductChargeId);
+/
+
+PROMPT Creating Foreign Keys on 'Payment'
+ALTER TABLE Payment ADD CONSTRAINT
+Sub_Pmt_FK FOREIGN KEY
+  (InvoiceId) REFERENCES Invoice
+  (InvoiceId);
+/
+
+PROMPT Creating Foreign Keys on 'Subscription'
+ALTER TABLE Subscription ADD CONSTRAINT
+Cus_Sub_FK FOREIGN KEY
+  (CustomerId) REFERENCES Customer
+  (CustomerId);
+/
+
+ALTER TABLE Subscription ADD CONSTRAINT
+Product_Sub_FK FOREIGN KEY
+  (ProductId) REFERENCES Product
+  (ProductId);
+/
+
+
+--PROMPT subscription.sqs
+
+PROMPT Creating Sequence 'PaymentId_SEQ'
+CREATE SEQUENCE PaymentId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+
+PROMPT Creating Sequence 'SubscriptionProductChargeId_Seq'
+CREATE SEQUENCE SubscriptionProductChargeId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+
+PROMPT Creating Sequence 'InvoiceId_Seq'
+CREATE SEQUENCE InvoiceId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+
+PROMPT Creating Sequence 'SubscriptionId_Seq'
+CREATE SEQUENCE SubscriptionId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+
+PROMPT Creating Sequence 'ProductId_Seq'
+CREATE SEQUENCE ProductId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+
+PROMPT Creating Sequence 'ProductChargeId_Seq'
+CREATE SEQUENCE ProductChargeId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+
+PROMPT Creating Sequence 'CustomerId_Seq'
+CREATE SEQUENCE CustomerId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+
+PROMPT Creating Sequence 'PaymentMethodId_Seq'
+CREATE SEQUENCE PaymentMethodId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+
+/** Creating Views **/
+
+PROMPT Creating View 'Customer_Subscription_View'
+CREATE VIEW  Customer_Subscription_View AS 
+SELECT  c.FirstName, s.Name, s.TermType, s.TermStartDate, s.TermEndDate
+FROM   Customer c
+JOIN   Subscription s
+ON     c.CustomerId = s.CustomerId;
+
+PROMPT Creating View 'Product_Charge_View'
+CREATE VIEW  Product_Charge_View AS 
+SELECT  p.ProductName, p.ProductDescription, 
+c.ProductChargeName, c.ProductChargeType
+FROM   Product p
+JOIN   ProductCharge c
+ON     p.ProductId = c.ProductId;
+
+/** Creating Triggers **/
+PROMPT Creating View 'SubscriptionAudit_Trg'
+CREATE OR REPLACE TRIGGER SubscriptionAudit_Trg
+    AFTER 
+    UPDATE OR DELETE 
+    ON Subscription
+    FOR EACH ROW    
+DECLARE
+   l_transaction VARCHAR2(10);
+BEGIN
+   -- determine the transaction type
+   l_transaction := CASE  
+         WHEN UPDATING THEN 'UPDATE'
+         WHEN DELETING THEN 'DELETE'
+   END;
+ 
+   -- insert a row into the Subscription_Audit table   
+   INSERT INTO SubscriptionAudit (ModifiedBy, ModifiedDate)
+   VALUES(USER, SYSDATE);
+END;
+/
+
+CREATE OR REPLACE TRIGGER ProductCharge_Trg
+    AFTER 
+    UPDATE OR DELETE 
+    ON ProductCharge
+    FOR EACH ROW    
+DECLARE
+   l_transaction VARCHAR2(10);
+BEGIN
+   -- determine the transaction type
+   l_transaction := CASE  
+         WHEN UPDATING THEN 'UPDATE'
+         WHEN DELETING THEN 'DELETE'
+   END;
+ 
+   -- insert a row into the ProductCharge_Audit table   
+   INSERT INTO ProductChargeAudit (ModifiedBy, ModifiedDate)
+   VALUES(USER, SYSDATE);
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER CustomerSequence_Trg
+BEFORE INSERT ON Customer
+FOR EACH ROW
+BEGIN
+   :new.CustomerId := CustomerId_Seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER PaymentMethodSequence_Trg
+BEFORE INSERT ON PaymentMethod
+FOR EACH ROW
+BEGIN
+   :new.PaymentMethodId := PaymentMethodId_Seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER SubscriptionSequence_Trg
+BEFORE INSERT ON Subscription
+FOR EACH ROW
+BEGIN
+   :new.SubscriptionId := SubscriptionId_Seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER InvoiceSequence_Trg
+BEFORE INSERT ON Invoice
+FOR EACH ROW
+BEGIN
+   :new.InvoiceId := InvoiceId_Seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER ProductChargeSequence_Trg
+BEFORE INSERT ON ProductCharge
+FOR EACH ROW
+BEGIN
+   :new.ProductChargeId := ProductChargeId_Seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER ProductSequence_Trg
+BEFORE INSERT ON Product
+FOR EACH ROW
+BEGIN
+   :new.ProductId := ProductId_Seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER SubscriptionProductChargeSequence_Trg
+BEFORE INSERT ON SubscriptionProductCharge
+FOR EACH ROW
+BEGIN
+   :new.SubscriptionProductChargeId := SubscriptionProductChargeId_Seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER PaymentSequence_Trg
+BEFORE INSERT ON Payment
+FOR EACH ROW
+BEGIN
+   :new.PaymentId := PaymentId_Seq.NEXTVAL;
+END;
+/

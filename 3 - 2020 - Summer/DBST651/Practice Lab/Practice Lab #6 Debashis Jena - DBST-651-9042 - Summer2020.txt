@@ -1,0 +1,72 @@
+-- Q1
+-- List all courses that has "Intro to information systems' as prerequiste
+select * from course where prerequisite in 
+(select course_no from course where description = 'Intro to Information Systems');
+
+-- Q2
+select Description, cost, (select avg(nvl(cost,0)) from course) AVGCost from course
+where cost >= (select avg(nvl(cost,0)) from course);
+
+-- Q3
+select z.zip, count(i.zip) instructor_count from zipcode z 
+join instructor i on z.zip = i.zip 
+group by z.zip;
+
+-- Q4
+select city, state, count(s.zip) student_count from zipcode z 
+left outer join student s 
+on (z.zip = s.zip)
+where state = 'CT' 
+group by city, state, s.zip
+order by city, count(s.zip) desc;
+
+-- Q5
+select MIN(Numeric_grade) as MIN, MAX(Numeric_grade) as MAX, AVG(Numeric_grade) as AVG from 
+grade g join section s 
+on g.section_id = s.section_id 
+join instructor i 
+on s.instructor_id = i.instructor_id 
+where g.grade_type_code = 'FI' and
+i.first_name = 'Todd' and i.last_name = 'Smythe';
+
+-- Q6
+select  sect.section_no, MAX(g.numeric_grade), MIN(g.numeric_grade), AVG(g.numeric_grade)  from student s 
+inner join enrollment e on s.student_id = e.student_id
+inner join section sect on e.section_id = sect.section_id
+inner join grade g on sect.section_id = g.section_id
+inner join course c on sect.course_no = c.course_no
+where g.grade_type_code = 'MT'
+and c.description = 'Intro to Information Systems'
+group by  sect.section_no;
+
+-- Q7
+select i.instructor_id,i.first_name, count(*)  from 
+ section s 
+join instructor i 
+on s.instructor_id = i.instructor_id
+group by i.instructor_id, i.first_name
+having count(*) < 10;
+
+-- Q8
+select * from (select city,  count(s.zip)  student_count from zipcode z 
+inner join student s 
+on (z.zip = s.zip)
+group by city)v order by student_count desc
+FETCH Next 1 row only; 
+
+-- Q9
+select z.zip, count(i.zip) instructor_count,count(s.zip) student_count  from zipcode z 
+left join instructor i on z.zip = i.zip 
+left join student s on z.zip = s.zip
+group by z.zip, s.zip 
+having count(i.zip) >= 4 and count(s.zip) >=3 ;
+
+-- Q10
+select z.city,z.state, count(s.zip) student_residents, count(i.zip) instructor_residents, 
+count(s.zip) + count(i.zip) as total_student_instructor_residents 
+from zipcode z 
+left join instructor i on z.zip = i.zip 
+left join student s on z.zip = s.zip
+group by z.city, z.state
+having count(s.zip) + count(i.zip) >= 10; 
+

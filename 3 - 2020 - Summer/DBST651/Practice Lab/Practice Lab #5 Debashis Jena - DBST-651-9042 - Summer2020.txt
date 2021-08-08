@@ -1,0 +1,77 @@
+-- Q1
+select instructor_id,
+LOWER(salutation) salutation,
+upper(last_name) last_name,
+first_name,
+street_address,
+zip,
+created_by,
+created_date,
+modified_by,
+modified_date,
+'(' || SUBSTR(phone, 0, 3) || ')' || ' ' || SUBSTR(phone, 4, 3) || '-' || SUBSTR(phone, 7, 4) phonenumber from INSTRUCTOR;
+
+
+-- Q2 
+select student.student_id, student.first_name, student.last_name, student.street_address, student.zip, zipcode.state 
+from student join zipcode on student.zip = zipcode.zip
+where zipcode.state = 'NY' order by student.last_name,student.first_name desc;
+
+
+-- Q3
+select instructor.first_name, instructor.last_name, NVL(instructor.zip, 'N/A') as zip
+,NVL(zipcode.city, 'N/A') as city, NVL(zipcode.state,'N/A') as state
+from instructor left join zipcode on instructor.zip = zipcode.zip;
+
+
+-- Q4
+select count(*) from instructor inner join zipcode on instructor.zip = zipcode.zip
+where zipcode.state = 'NY' and substr(instructor.street_address,1,3) = '518';
+
+
+-- Q5
+select AVG(NUMERIC_GRADE) AverageGrade, MIN(NUMERIC_GRADE) MinimumGrade, MAX(NUMERIC_GRADE) MaxGrade from grade join grade_type on 
+grade.grade_type_code = grade_type.grade_type_code;
+
+
+-- Q6
+Select student.student_id, student.first_name, TO_DATE(student.registration_date),
+student.last_name,student.registration_date from student left outer join enrollment 
+on student.student_id = enrollment.student_id 
+where enrollment.student_id is null
+and student.registration_date >= TO_DATE('15-FEB-07');
+
+
+-- Q7
+select Count(*) StudentsCount from student 
+join enrollment on student.student_id = enrollment.student_id
+join section on enrollment.section_id = section.section_id
+join instructor on section.instructor_id = instructor.instructor_id
+where instructor.first_name = 'Todd' and instructor.last_name = 'Smythe';
+
+
+-- Q8
+select * from student 
+join enrollment on student.student_id = enrollment.student_id
+join section on enrollment.section_id = section.section_id
+join course on section.course_no = course.course_no
+where course.Description = 'Advanced Java Programming'
+
+
+-- Q9
+select distinct student.first_name, student.last_name, grade.grade_type_code, grade.numeric_grade from student 
+join enrollment on student.student_id = enrollment.student_id
+join section on enrollment.section_id = section.section_id
+join course on section.course_no = course.course_no
+join grade on grade.student_id = student.student_id 
+where course.Description = 'Advanced Java Programming' and 
+grade.numeric_grade >= 95;
+
+
+-- Q10
+select distinct instructor.first_name, instructor.last_name,course.description  from student 
+join enrollment on student.student_id = enrollment.student_id
+join section on enrollment.section_id = section.section_id
+join course on section.course_no = course.course_no
+join instructor on section.instructor_id = instructor.instructor_id 
+where course.Description = 'Advanced Java Programming';

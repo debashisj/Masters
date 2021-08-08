@@ -1,0 +1,125 @@
+1.	List all information about all grade types
+SELECT
+    "A1"."GRADE_TYPE_CODE"   "GRADE_TYPE_CODE",
+    "A1"."DESCRIPTION"       "DESCRIPTION",
+    "A1"."CREATED_BY"        "CREATED_BY",
+    "A1"."CREATED_DATE"      "CREATED_DATE",
+    "A1"."MODIFIED_BY"       "MODIFIED_BY",
+    "A1"."MODIFIED_DATE"     "MODIFIED_DATE"
+FROM
+    "DBST_USER"."GRADE_TYPE" "A1"
+
+
+
+2.	Display the following information about all instructors: Instructor ID, full name (format: 'First_Name Last_Name'; name column as "Full Name"), and address (format: 'Street_Address, Zip'; name column as "Full Address")
+
+SELECT
+    "A1"."INSTRUCTOR_ID" "INSTRUCTOR_ID",
+    "A1"."FIRST_NAME"
+    || ' '
+    || "A1"."LAST_NAME" "Full Name",
+    "A1"."STREET_ADDRESS" || "A1"."ZIP" "Full Address"
+FROM
+    "DBST_USER"."INSTRUCTOR" "A1"
+
+
+3.	List all zipcodes (zip, city, state) that belong to NY state, and the city is either New York or Long Island City
+
+SELECT
+    "A1"."ZIP"     "ZIP",
+    "A1"."CITY"    "CITY",
+    "A1"."STATE"   "STATE"
+FROM
+    "DBST_USER"."ZIPCODE" "A1"
+WHERE
+    "A1"."STATE" = 'NY'
+    AND ( "A1"."CITY" = 'New York'
+          OR "A1"."CITY" = 'Long Island City' )
+
+4.	Add yourself as a new student to the Student table (use sequence STUDENT_ID_SEQ.NEXTVAL as Student_ID and 07070 as zip)
+
+INSERT INTO DBST_USER.STUDENT 
+        (STUDENT_ID, SALUTATION, FIRST_NAME,
+        LAST_NAME, STREET_ADDRESS, ZIP,
+        PHONE, EMPLOYER, REGISTRATION_DATE,
+        CREATED_BY, CREATED_DATE, MODIFIED_BY, 
+        MODIFIED_DATE) 
+    VALUES 
+        (STUDENT_ID_SEQ.nextval, 'Mr.','Debashis',
+        'Jena', '123 Main Street', '07070',
+        '1231231234', 'Utsav Tech', SYSDATE, 
+        'Debashis', SYSDATE, 'Debashis',
+        SYSDATE);
+
+
+
+5.	List all students (display Student_ID, first name and last name) who live in zip 07070
+
+SELECT
+    "A1"."STUDENT_ID"   "STUDENT_ID",
+    "A1"."FIRST_NAME"   "FIRST_NAME",
+    "A1"."LAST_NAME"    "LAST_NAME"
+FROM
+    "DBST_USER"."STUDENT" "A1"
+WHERE
+    "A1"."ZIP" = '07070';
+
+6.	Show how many students who have phone area code 212 (HINT: use COUNT and LIKE operator)
+
+SELECT
+    COUNT(*) "COUNT(*)"
+FROM
+    "DBST_USER"."STUDENT" "A1"
+WHERE
+    "A1"."PHONE" LIKE '212%';
+
+7.	List all student names who work for Electronic Engineers and whose last name is not Grant nor Garnes
+
+SELECT
+    "A1"."STUDENT_ID"          "STUDENT_ID",
+    "A1"."SALUTATION"          "SALUTATION",
+    "A1"."FIRST_NAME"          "FIRST_NAME",
+    "A1"."LAST_NAME"           "LAST_NAME",
+    "A1"."STREET_ADDRESS"      "STREET_ADDRESS",
+    "A1"."ZIP"                 "ZIP",
+    "A1"."PHONE"               "PHONE",
+    "A1"."EMPLOYER"            "EMPLOYER",
+    "A1"."REGISTRATION_DATE"   "REGISTRATION_DATE",
+    "A1"."CREATED_BY"          "CREATED_BY",
+    "A1"."CREATED_DATE"        "CREATED_DATE",
+    "A1"."MODIFIED_BY"         "MODIFIED_BY",
+    "A1"."MODIFIED_DATE"       "MODIFIED_DATE"
+FROM
+    "DBST_USER"."STUDENT" "A1"
+WHERE
+    "A1"."EMPLOYER" = 'Electronic Engineers'
+    AND "A1"."LAST_NAME" <> 'Grant'
+    AND "A1"."LAST_NAME" <> 'Garnes';
+    
+
+
+8.	Delete your own student record added for query 4
+
+DELETE FROM STUDENT
+WHERE first_name = 'Debashis' AND last_name = 'Jena';
+
+9.	Lower cost of all courses by 300
+
+UPDATE COURSE SET 
+COST = COST - 300;
+
+10.	List all course costs (show course description and cost only) by the order of cost from lowest to highest (show courses without cost first)
+
+SELECT
+    "A1"."DESCRIPTION"   "DESCRIPTION",
+    "A1"."COST"          "COST"
+FROM
+    "DBST_USER"."COURSE" "A1"
+ORDER BY
+    CASE
+        WHEN "A1"."COST" IS NULL THEN
+            0
+        ELSE
+            1
+    END,
+    "A1"."COST"

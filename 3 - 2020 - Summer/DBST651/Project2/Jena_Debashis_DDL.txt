@@ -1,0 +1,381 @@
+SET ECHO ON
+SET SERVEROUTPUT ON;
+DROP VIEW Get_BranchInfo_View;
+DROP VIEW Get_Report_View;
+DROP TRIGGER CustomerLSequence_Trigger;
+DROP TRIGGER LibrarySequence_Trigger;
+DROP TRIGGER LibraryCustomerSequence_Trigger;
+DROP TRIGGER BranchSequence_Trigger;
+DROP TRIGGER CatalogSequence_Trigger;
+DROP TRIGGER BranchItemSequence_Trigger;
+DROP TRIGGER TransactionSequence_Trigger;
+
+DROP TABLE Library CASCADE CONSTRAINTS;
+DROP TABLE Customer CASCADE CONSTRAINTS;
+DROP TABLE LibraryCustomer CASCADE CONSTRAINTS;
+DROP TABLE Branch CASCADE CONSTRAINTS;
+DROP TABLE Catalog CASCADE CONSTRAINTS;
+DROP TABLE BranchItem CASCADE CONSTRAINTS;
+DROP TABLE Transaction CASCADE CONSTRAINTS;
+
+
+PROMPT === Drop Sequences ===
+DROP SEQUENCE LibraryId_Seq;
+DROP SEQUENCE LibraryCustomerId_Seq;
+DROP SEQUENCE BranchId_Seq;
+DROP SEQUENCE CustomerLId_Seq;
+DROP SEQUENCE BranchItemId_Seq;
+DROP SEQUENCE TransactionId_Seq;
+DROP SEQUENCE CatalogId_Seq;
+
+/** Creating Tables **/
+PROMPT Creating Table 'Library'
+CREATE TABLE LIBRARY 
+(
+  LIBRARYID NUMBER(8,0) NOT NULL 
+, LIBRARYNAME VARCHAR2(50) NOT NULL 
+, PHONE VARCHAR2(15) 
+, ADDRESS1 VARCHAR2(50) 
+, ADDRESS2 VARCHAR2(50) 
+, CITY VARCHAR2(50) 
+, STATE VARCHAR2(50) 
+, ZIPCODE VARCHAR2(10) 
+, CREATEDBY VARCHAR2(50) NOT NULL 
+, CREATEDDATE DATE NOT NULL 
+, MODIFIEDBY VARCHAR2(50) NOT NULL 
+, MODIFIEDDATE DATE 
+);
+PROMPT Creating Table 'Customer'
+CREATE TABLE CUSTOMER
+ (
+CUSTOMERID NUMBER(8,0) NOT NULL
+ ,FIRSTNAME VARCHAR2(32) NOT NULL
+ ,LASTNAME VARCHAR2(32) NOT NULL
+ ,ADDRESS1 VARCHAR2(50)
+ ,ADDRESS2 VARCHAR2(50)
+ ,CITY VARCHAR2(50)
+ ,STATE VARCHAR2(50)
+ ,ZIPCODE VARCHAR2(10)
+ ,CREATEDBY VARCHAR2(30) NOT NULL
+ ,CREATEDDATE DATE NOT NULL
+ ,MODIFIEDBY VARCHAR2(30) NOT NULL
+ ,MODIFIEDDATE DATE NOT NULL
+ );
+ 
+PROMPT CREATING TABLE 'LIBRARYCUSTOMER'
+CREATE TABLE LIBRARYCUSTOMER
+ (
+LIBRARYCUSTOMERID NUMBER(8,0) NOT NULL
+ ,LIBRARYID NUMBER(8,0) NOT NULL
+ ,CUSTOMERID NUMBER(8,0) NOT NULL
+ ,LIBRARYCARDNUMBER INTEGER
+ ,LIBRARYCARDPIN INTEGER
+ ,LIBRARYCARDEXPIRY DATE
+ ,CREATEDBY VARCHAR2(30) NOT NULL
+ ,CREATEDDATE DATE NOT NULL
+ ,MODIFIEDBY VARCHAR2(30) NOT NULL
+ ,MODIFIEDDATE DATE NOT NULL
+ );
+ 
+PROMPT CREATING TABLE 'BRANCH'
+CREATE TABLE BRANCH
+ (
+BRANCHID NUMBER(8,0) NOT NULL
+ ,LIBRARYID NUMBER(8,0) NOT NULL
+ ,BRANCHNAME VARCHAR2(32)
+ ,BRANCHPHONE VARCHAR2(32)
+ ,ADDRESS1 VARCHAR2(1000)
+ ,ADDRESS2 VARCHAR2(50)
+ ,CITY VARCHAR2(50)
+ ,STATE VARCHAR2(50)
+ ,ZIPCODE VARCHAR2(10)
+ ,CREATEDBY VARCHAR2(30) NOT NULL
+ ,CREATEDDATE DATE NOT NULL
+ ,MODIFIEDBY VARCHAR2(30) NOT NULL
+ ,MODIFIEDDATE DATE NOT NULL
+ );
+ 
+PROMPT CREATING TABLE 'CATALOG'
+CREATE TABLE CATALOG
+ (
+CATALOGID NUMBER(8,0) NOT NULL
+ ,TITLE VARCHAR2(100) NOT NULL
+ ,DESCRIPTION VARCHAR2(500)
+ ,PUBLISHER VARCHAR2(100)
+ ,RELEASEDATE DATE
+ ,TYPE VARCHAR2(32)
+ ,BOOKISBN VARCHAR2(32)
+ ,BOOKPAGES VARCHAR2(32)
+ ,DVDLENGTH VARCHAR2(10)
+ ,CREATEDBY VARCHAR2(30) NOT NULL
+ ,CREATEDDATE DATE NOT NULL
+ ,MODIFIEDBY VARCHAR2(30) NOT NULL
+ ,MODIFIEDDATE DATE NOT NULL
+ );
+ 
+PROMPT CREATING TABLE 'BRANCHITEM'
+CREATE TABLE BRANCHITEM
+ (
+BRANCHITEMID NUMBER(8,0) NOT NULL
+ ,BRANCHID NUMBER(8,0) NOT NULL
+ ,CATALOGID NUMBER(8,0) NOT NULL
+ ,COPYNUMBER INTEGER
+ ,PURCHASEDATE DATE
+ ,CREATEDBY VARCHAR2(30) NOT NULL
+ ,CREATEDDATE DATE NOT NULL
+ ,MODIFIEDBY VARCHAR2(30) NOT NULL
+ ,MODIFIEDDATE DATE NOT NULL
+ );
+ 
+PROMPT CREATING TABLE 'TRANSACTION'
+CREATE TABLE TRANSACTION
+ (
+TRANSACTIONID NUMBER(8,0) NOT NULL
+ ,BRANCHITEMID NUMBER(8,0) NOT NULL
+ ,CUSTOMERID NUMBER(8,0) NOT NULL
+ ,CHECKOUTDATE DATE
+ ,DUEDATE DATE
+ ,RETURNDATE DATE
+ ,CREATEDBY VARCHAR2(30) NOT NULL
+ ,CREATEDDATE DATE NOT NULL
+ ,MODIFIEDBY VARCHAR2(30) NOT NULL
+ ,MODIFIEDDATE DATE NOT NULL
+ );
+ 
+PROMPT Creating Index 'Lib_Branch_FK_I'
+CREATE INDEX Lib_Branch_FK_I ON Branch
+ (LibraryId);
+
+PROMPT Creating Index 'Sub_Inv_FK_I'
+CREATE INDEX Bran_BranItem_FK_I ON BranchItem
+ (BranchId);
+
+PROMPT Creating Index 'BranItem_Tran_FK_I'
+CREATE INDEX BranItem_Tran_FK_I ON Transaction
+ (BranchItemId);
+PROMPT Creating Index 'Cust_Tran_FK_I'
+CREATE INDEX Cust_Tran_FK_I ON Transaction
+ (CustomerId);
+PROMPT Creating Index 'Lib_LibCust_FK_I'
+CREATE INDEX Lib_LibCust_FK_I ON LibraryCustomer
+ (LibraryId);
+PROMPT Creating Index 'Cust_Tran_FK_I'
+CREATE INDEX LibCustom_Cust_FK_I ON LibraryCustomer
+ (CustomerId);
+PROMPT Creating Index 'BranItem_Cat_FK_I'
+CREATE INDEX BranItem_Cat_FK_I ON BranchItem
+ (CatalogId);
+PROMPT Creating Primary Key on 'Library'
+ALTER TABLE Library
+ ADD CONSTRAINT Lib_PK PRIMARY KEY
+  (LibraryId);
+
+PROMPT Creating Primary Key on 'LibraryCustomer'
+ALTER TABLE LibraryCustomer
+ ADD CONSTRAINT LibCust_PK PRIMARY KEY
+  (LibraryCustomerId);
+
+PROMPT Creating Primary Key on 'Branch'
+ALTER TABLE Branch
+ ADD CONSTRAINT Branch_PK PRIMARY KEY
+  (BranchId);
+
+PROMPT Creating Primary Key on 'Customer'
+ALTER TABLE Customer
+ ADD CONSTRAINT Customer_PK PRIMARY KEY
+  (CustomerId);
+
+PROMPT Creating Primary Key on 'BranchItem'
+ALTER TABLE BranchItem
+ ADD CONSTRAINT BranItem_PK PRIMARY KEY
+  (BranchItemId);
+
+PROMPT Creating Primary Key on 'Transaction'
+ALTER TABLE Transaction
+ ADD CONSTRAINT Tran_PK PRIMARY KEY
+  (TransactionId);
+
+PROMPT Creating Primary Key on 'Catalog'
+ALTER TABLE Catalog
+ ADD CONSTRAINT Cat_PK PRIMARY KEY
+  (CatalogId);
+
+
+PROMPT Creating Foreign Keys on 'Branch'
+ALTER TABLE Branch ADD CONSTRAINT
+ Lib_Bran_FK FOREIGN KEY
+  (LibraryId) REFERENCES Library
+  (LibraryId);
+
+PROMPT Creating Foreign Keys on 'LibraryCustomer'
+ALTER TABLE LibraryCustomer ADD CONSTRAINT
+ Lib_LibCust_FK FOREIGN KEY
+  (LibraryId) REFERENCES Library
+  (LibraryId);
+
+ALTER TABLE LibraryCustomer ADD CONSTRAINT
+ Cust_LibCust_FK FOREIGN KEY
+  (Customerid) REFERENCES Customer
+  (Customerid);
+
+PROMPT Creating Foreign Keys on 'BranchItem'
+ALTER TABLE BranchItem ADD CONSTRAINT
+  Bran_BranItem_FK FOREIGN KEY
+  (BranchId) REFERENCES Branch
+  (BranchId);
+
+ALTER TABLE BranchItem ADD CONSTRAINT
+  BranItem_Cat_FK FOREIGN KEY
+  (CatalogId) REFERENCES Catalog
+  (CatalogId);
+
+ALTER TABLE Transaction ADD CONSTRAINT
+  BranItem_Tran_FK FOREIGN KEY
+  (BranchItemId) REFERENCES BranchItem
+  (BranchItemId);
+
+ALTER TABLE Transaction ADD CONSTRAINT
+   Cust_Tran_FK FOREIGN KEY
+  (CustomerId) REFERENCES Customer
+  (CustomerId);
+
+--PROMPT Library seqs
+PROMPT Creating Sequence 'LibraryId_Seq'
+CREATE SEQUENCE LibraryId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+PROMPT Creating Sequence 'LibraryCustomerId_Seq'
+CREATE SEQUENCE LibraryCustomerId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+PROMPT Creating Sequence 'BranchId_Seq'
+CREATE SEQUENCE BranchId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+PROMPT Creating Sequence 'CustomerLId_Seq'
+CREATE SEQUENCE CustomerLId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+PROMPT Creating Sequence 'BranchItemId_Seq'
+CREATE SEQUENCE BranchItemId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+PROMPT Creating Sequence 'TransactionId_Seq'
+CREATE SEQUENCE TransactionId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+PROMPT Creating Sequence 'CatalogId_Seq'
+CREATE SEQUENCE CatalogId_Seq
+ INCREMENT BY 1
+ START WITH 1
+ NOMAXVALUE
+ MINVALUE 1
+ NOCYCLE
+ NOCACHE
+/
+
+CREATE OR REPLACE TRIGGER LibrarySequence_Trg
+BEFORE INSERT ON Library
+FOR EACH ROW
+BEGIN
+   :new.LibraryId := LibraryId_Seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER LibraryCustomerSequence_Trg
+BEFORE INSERT ON LibraryCustomer
+FOR EACH ROW
+BEGIN
+   :new.LibraryCustomerId := LibraryCustomerId_Seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER BranchSequence_Trg
+BEFORE INSERT ON Branch
+FOR EACH ROW
+BEGIN
+   :new.BranchId := BranchId_Seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER CustomerLSequence_Trg
+BEFORE INSERT ON  Customer
+FOR EACH ROW
+BEGIN
+   :new.CustomerId := CustomerLId_Seq.NEXTVAL;
+END;
+/
+CREATE OR REPLACE TRIGGER BranchItemSequence_Trg
+BEFORE INSERT ON BranchItem
+FOR EACH ROW
+BEGIN
+   :new.BranchItemId := BranchItemId_Seq.NEXTVAL;
+END;
+/
+CREATE OR REPLACE TRIGGER TransactionSequence_Trg
+BEFORE INSERT ON Transaction
+FOR EACH ROW
+BEGIN
+   :new.TransactionId := TransactionId_Seq.NEXTVAL;
+END;
+/
+
+CREATE OR REPLACE TRIGGER CatalogSequence_Trg
+BEFORE INSERT ON Catalog
+FOR EACH ROW
+BEGIN
+   :new.CatalogId := CatalogId_Seq.NEXTVAL;
+END;
+/
+/** Creating Views **/
+
+PROMPT Creating View 'Get_BranchInfo_View'
+ CREATE VIEW  Get_BranchInfo_View AS 
+ Select b.BranchId, b.LibraryId, b.BranchName,b.BranchPhone,
+ b.Address1, b.Address2, b.City, b.State, b.ZipCode,
+ bi.BranchItemId, bi.CatalogId, bi.CopyNumber, bi.PurchaseDate 
+ from Branch b
+ inner join BranchItem bi
+ on b.BranchId = bi.BranchId;
+
+PROMPT Creating View 'Get_Report_View'
+CREATE VIEW  Get_Report_View AS 
+ Select t.TransactionId, t.CheckOutDate, t.DueDate, c.CustomerId, c.FirstName, c.LastName,
+ c.Address1, c.City, c.State, c.ZipCode, lc.LibraryCustomerId,
+ lc.LibraryCardNumber, lc.LibraryCardPin,
+ c.CatalogId, bInfo.CopyNumber, bInfo.PurChaseDate, bInfo.BranchName, bInfo.BranchId, lib.LibraryName from Library lib 
+ join LibraryCustomer lc on lc.LibraryId = lib.LibraryId 
+ join Customer c on lc.CustomerId = c.CustomerId 
+ join Get_BranchInfo_View bInfo on lib.LibraryId = bInfo.LibraryId 
+ join Catalog c on bInfo.CatalogId = c.CatalogId
+ left outer join Transaction t on t.CustomerId = c.CustomerId;
